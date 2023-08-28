@@ -124,6 +124,13 @@ const resolvers = {
 
 			const user = await context.prisma.user.create({
 				data: { ...args, password },
+				// after create only return these fields
+				select: {
+					id: true,
+					name: true,
+					email: true,
+					links: true
+				}
 			});
 
 			const token = sign({ userId: user.id }, APP_SECRET);
@@ -152,9 +159,12 @@ const resolvers = {
 
 			const token = sign({ userId: user.id }, APP_SECRET);
 
+			// clean the password before return to frontend
+			const { password: _, ...modifiedUser } = user;
+
 			return {
 				token,
-				user,
+				modifiedUser,
 			};
 		},
 		vote: async (
