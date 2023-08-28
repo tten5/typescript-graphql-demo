@@ -9,12 +9,13 @@
 - Server: `@apollo/server` integrated with ExpressJs
     - Use `graph-ws` and `ws` for WebSocket server 
 - Create schema with `@graphql-tools` 
-- ORM for Databse: use `Prisma` to access database inside of GraphQL resolvers
-- Database: PostgreSql
+- ORM for Database: use `Prisma` to access database inside of GraphQL resolvers
+- Database: PostgreSQL
 
 ## How to run 
 
-- First setup
+### 1. First setup
+- Download necessary packages
 ```
 npm install
 ```
@@ -26,9 +27,12 @@ DATABASE_URL=<YOUR DATABASE URL>
 ```
 APP_SECRET=<YOUR SECRET>
 ```
+- Apply prisma migration
+```
+npx prisma migrate deploy
+```
 
-
-- Run server
+### 2. Run server
 ```
 npm run dev
 ```
